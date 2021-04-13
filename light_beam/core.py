@@ -1,6 +1,7 @@
 from typing import Dict, List, Callable
 from wsgiref.util import setup_testing_defaults
 from wsgiref.simple_server import make_server
+from views import PageNotFound404
 
 
 class LightBeamApp:
@@ -10,10 +11,18 @@ class LightBeamApp:
 
     def __call__(self, environ: Dict, start_response: Callable):
         setup_testing_defaults(environ)
-        # сначала в функцию start_response передаем код ответа и заголовки
-        start_response('200 OK', [('Content-Type', 'text/html')])
-        # возвращаем тело ответа в виде списка из bite
-        return [b'<h1>Hello my simple WSGI application!</h1>']
+        path = environ.get('PATH_INFO')
+        # Проверка вхождения запрошенного пути в список наших роутеров
+        if path in self.routes.keys():
+            _view = self.routes[path]
+        else:
+            _view = PageNotFound404()
+        request = dict()
+        for controller in self.controllers:
+            controller(request)
+        code, body = _view(request)
+        start_response(code, [('Content-Type', 'text/html')])
+        return [body.encode('utf-8')]
 
 
 
