@@ -1,10 +1,11 @@
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 from settings import BASE_DIR
 
 
-def render(template_name, folder='templates', **kwargs):
+jinja_env = Environment(loader=FileSystemLoader(BASE_DIR / 'templates'))
+
+
+def render(template_name, **kwargs):
     """Функция рендеринга шаблонов"""
-    file_path = BASE_DIR / folder / template_name
-    with open(file_path, encoding='utf-8') as f:
-        template = Template(f.read())
+    template = jinja_env.get_template(template_name)
     return template.render(**kwargs)

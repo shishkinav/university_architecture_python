@@ -3,6 +3,7 @@ from frontapp.templates import render
 
 class MainPage:
     def __call__(self, request, **kwargs):
+        kwargs['var'] = 'тестик'
         return '200 OK', render('index.html', **kwargs)
 
 
