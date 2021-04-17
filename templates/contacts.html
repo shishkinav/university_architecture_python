@@ -6,5 +6,25 @@
 
 {% block content %}
     <h1>Контакты</h1>    
-    
+    <form action="" method="post">
+        <fieldset>
+            <legend>Форма обратной связи</legend>
+            <p><label class="title" for="name">Ваше имя:</label>
+                 <input type="text" name="name" id="name"><br />
+                 <label class="title" for="email">Ваш email:</label>
+                 <input type="text" name="email" id="email"></p>
+            <p><label for="type_request" class="title">Тип обращения:</label>
+                <select name="type_request" id="type_request">
+                    <option value="consult">Консультация</option>
+                    <option value="complaint">Жалоба</option>
+                    <option value="suggestion">Предложение</option>
+                </select></p>
+            <p><label class="title" for="theme">Тема обращения:</label>
+                 <input type="text" name="theme" id="theme"></p>
+            <p><label class="title" for="message">Текст Вашего обращения:</label>
+            <p><textarea type="text" name="message" id="message"></textarea></p>
+            
+        </fieldset>
+     <div class="submit"><input type="submit" value="Регистрация" /></div>
+    </form>
 {% endblock %}

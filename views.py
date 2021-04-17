@@ -9,6 +9,10 @@ class MainPage:
 
 class Contacts:
     def __call__(self, request, **kwargs):
+        if request.get("method") == 'POST':
+            print('Пользователь отправил данные из формы обратной связи:\n ' \
+            f'{request.get("POST_params")}.\nПозже мы будем здесь вести запись ' \
+            'в БД этих обращений.')
         return '200 OK', render('contacts.html', **kwargs)
 
 
