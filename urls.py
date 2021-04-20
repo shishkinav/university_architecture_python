@@ -1,7 +1,8 @@
-from views import MainPage, Contacts
+from views import MainPage, Contacts, AboutPage
 
 
 urlpatterns = {
     '/': MainPage(),
-    '/contacts': Contacts()
+    '/contacts': Contacts(),
+    '/about': AboutPage(),
 }
